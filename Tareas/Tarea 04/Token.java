@@ -12,7 +12,7 @@ public class Token {
   static class Worker extends Thread {
     public void run() {
       try {
-        ServerSocket servidor = new ServerSocket(50000 + nodo);
+        ServerSocket servidor = new ServerSocket(50000);
         Socket conexion = servidor.accept();
         entrada = new DataInputStream(conexion.getInputStream()); 
       } catch (Exception e) {
