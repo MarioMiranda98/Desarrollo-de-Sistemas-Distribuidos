@@ -32,8 +32,9 @@ public class Chat {
         public void run() {
             while(true) {
                 try {
-                    byte[] a = recibe_mensaje(socket, 6500);
-                    System.out.println(new String(a, "UTF-8"));
+                    byte[] a = recibe_mensaje(socket, 100);
+                    String mensaje = new String(a, "UTF-8");
+                    System.out.println(mensaje);
                 } catch(IOException e) { e.printStackTrace(); }
             }
         }
@@ -57,7 +58,8 @@ public class Chat {
 
         while(true) {
             String linea = b.readLine();
-            String formato = "-" + nombre + " escribe: " + linea;
+            System.out.print("\33[1A\33[2K");
+            String formato = "-" + nombre + " escribe: " + linea.trim();
             envia_mensaje(formato.getBytes(), "230.0.0.0", 50000);
         }
     }
