@@ -5,7 +5,7 @@ public class ClienteRMI
   public static void main(String args[]) throws Exception
   {
     // en este caso el objeto remoto se llama "prueba", notar que se utiliza el puerto default 1099
-    String url = "rmi://localhost/prueba";
+    String url = "localhost";
 
     // obtiene una referencia que "apunta" al objeto remoto asociado a la URL
     InterfaceRMI r = (InterfaceRMI)Naming.lookup(url);
