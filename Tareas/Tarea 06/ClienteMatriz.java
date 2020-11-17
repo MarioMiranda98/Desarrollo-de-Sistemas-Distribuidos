@@ -19,16 +19,16 @@ public class ClienteMatriz {
 
         matrizB = transponerMatriz(matrizB);
 
-        ObjetoRemoto remoto = (ObjetoRemoto) Naming.lookup(URL + "0");
+        MatrizMethodsInterface remoto = (MatrizMethodsInterface) Naming.lookup(URL + "0");
         int[][] tmpC0 = remoto.multiplica_matrices(parte_matriz(matrizA, 0), parte_matriz(matrizB, 0), N);
         
-        ObjetoRemoto remoto1 = (ObjetoRemoto) Naming.lookup(URL + "1");
+        MatrizMethodsInterface remoto1 = (MatrizMethodsInterface) Naming.lookup(URL + "1");
         int[][] tmpC1 = remoto1.multiplica_matrices(parte_matriz(matrizA, 0), parte_matriz(matrizB, N / 2), N);
     
-        ObjetoRemoto remoto2 = (ObjetoRemoto) Naming.lookup(URL + "2");
+        MatrizMethodsInterface remoto2 = (MatrizMethodsInterface) Naming.lookup(URL + "2");
         int[][] tmpC2 = remoto2.multiplica_matrices(parte_matriz(matrizA, N / 2), parte_matriz(matrizB, 0), N);
 
-        ObjetoRemoto remoto3 = (ObjetoRemoto) Naming.lookup(URL + "3");
+        MatrizMethodsInterface remoto3 = (MatrizMethodsInterface) Naming.lookup(URL + "3");
         int[][] tmpC3 = remoto3.multiplica_matrices(parte_matriz(matrizA, N / 2), parte_matriz(matrizB, N / 2), N);
     
         acomoda_matriz(matrizC, tmpC0, 0, 0);
