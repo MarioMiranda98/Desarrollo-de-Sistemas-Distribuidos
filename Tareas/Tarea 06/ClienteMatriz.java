@@ -3,6 +3,9 @@ import java.rmi.Naming;
 public class ClienteMatriz {
     static int N = 4;
     static final String URL = "rmi://localhost/nodo";
+    /*
+        Esta es una url generica, ya que no se sabia cual iba a ser la ip que Azure nos dara.
+    */
 
     public static void main(String[] args) throws Exception {
         int[][] matrizA = new int[N][N];
