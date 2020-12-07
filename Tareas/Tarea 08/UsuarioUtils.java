@@ -25,8 +25,6 @@ public class UsuarioUtils {
         System.out.println("Genero:");
         usuario.setGenero(br.readLine());
 
-        br.close();
-
         return usuario;
     }
 

@@ -53,8 +53,13 @@ public class Consumer {
             Usuario usuario = new Usuario();
             usuario = UsuarioUtils.crearUsuario(usuario);
             String cuerpo = gson.toJson(usuario);
-            String res = GenericServices.hacerConsulta(cuerpo, POST_METHOD, "alta", "usuario");
-            System.out.println(res);
+            ResponseModel response = GenericServices.hacerConsulta(cuerpo, POST_METHOD, "alta", "usuario");
+            if(response.getResponseCode() != 400) {
+                System.out.println(response.getMessage());
+            } else {
+                Error error = gson.fromJson(response.getMessage(), Error.class);
+                System.out.println(error.message);
+            }
         } catch(Exception e) { e.printStackTrace(); }
     }
 
@@ -63,10 +68,15 @@ public class Consumer {
 
         try {
             String cuerpo = UsuarioUtils.leerEmail();
-            String res = GenericServices.hacerConsulta(cuerpo, GET_METHOD, "consulta", "email");
+            ResponseModel response = GenericServices.hacerConsulta(cuerpo, GET_METHOD, "consulta", "email");
             
-            Usuario usuario = gson.fromJson(res, Usuario.class);
-            System.out.println(usuario.toString());
+            if(response.getResponseCode() != 400) {
+                Usuario usuario = gson.fromJson(response.getMessage(), Usuario.class);
+                System.out.println(usuario.toString());
+            } else {
+                Error error = gson.fromJson(response.getMessage(), Error.class);
+                System.out.println(error.message);
+            }
         } catch(Exception e) { e.printStackTrace(); }
     }
 
@@ -75,16 +85,28 @@ public class Consumer {
 
         try {
             String cuerpo = UsuarioUtils.leerEmail();
-            String res = GenericServices.hacerConsulta(cuerpo, POST_METHOD, "borra", "email");
+            ResponseModel response = GenericServices.hacerConsulta(cuerpo, POST_METHOD, "borra", "email");
             
-            System.out.println(res);
+            if(response.getResponseCode() != 400) {
+                System.out.println(response.getMessage());
+            } else {
+                Error error = gson.fromJson(response.getMessage(), Error.class);
+                System.out.println(error.message);
+            }
         } catch(Exception e) { e.printStackTrace(); }
     }
 
     private void borrarTodos() {
+        Gson gson = new Gson();
+        
         try {
-            String res = GenericServices.hacerConsulta("", POST_METHOD, "borrar", "");
-            System.out.println(res);
+            ResponseModel response = GenericServices.hacerConsulta("", POST_METHOD, "borrar", "");
+            if(response.getResponseCode() != 400) {
+                System.out.println(response.getMessage());
+            } else {
+                Error error = gson.fromJson(response.getMessage(), Error.class);
+                System.out.println(error.message);
+            }
         } catch(Exception e) { e.printStackTrace(); }
     }
 
