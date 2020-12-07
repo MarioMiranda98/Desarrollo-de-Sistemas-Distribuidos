@@ -16,7 +16,6 @@ public class Consumer {
         System.out.println("e. Salir");
 
         char seleccion = s.nextLine().charAt(0);
-        s.close();
 
         return seleccion; 
     }
@@ -45,13 +44,16 @@ public class Consumer {
     }
 
     private void altaUsuario() {
-        Gson gson = new Gson();
+        GsonBuilder builder = new GsonBuilder();
+        builder.serializeNulls();
+
+        Gson gson = builder.create();
 
         try {
             Usuario usuario = new Usuario();
             usuario = UsuarioUtils.crearUsuario(usuario);
             String cuerpo = gson.toJson(usuario);
-            String res = GenericServices.hacerConsulta(cuerpo, POST_METHOD, "alta");
+            String res = GenericServices.hacerConsulta(cuerpo, POST_METHOD, "alta", "usuario");
             System.out.println(res);
         } catch(Exception e) { e.printStackTrace(); }
     }
@@ -61,7 +63,7 @@ public class Consumer {
 
         try {
             String cuerpo = UsuarioUtils.leerEmail();
-            String res = GenericServices.hacerConsulta(cuerpo, GET_METHOD, "consulta");
+            String res = GenericServices.hacerConsulta(cuerpo, GET_METHOD, "consulta", "email");
             
             Usuario usuario = gson.fromJson(res, Usuario.class);
             System.out.println(usuario.toString());
@@ -73,7 +75,7 @@ public class Consumer {
 
         try {
             String cuerpo = UsuarioUtils.leerEmail();
-            String res = GenericServices.hacerConsulta(cuerpo, POST_METHOD, "borra");
+            String res = GenericServices.hacerConsulta(cuerpo, POST_METHOD, "borra", "email");
             
             System.out.println(res);
         } catch(Exception e) { e.printStackTrace(); }
@@ -81,7 +83,7 @@ public class Consumer {
 
     private void borrarTodos() {
         try {
-            String res = GenericServices.hacerConsulta("", POST_METHOD, "borrar");
+            String res = GenericServices.hacerConsulta("", POST_METHOD, "borrar", "");
             System.out.println(res);
         } catch(Exception e) { e.printStackTrace(); }
     }

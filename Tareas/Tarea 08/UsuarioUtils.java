@@ -25,7 +25,7 @@ public class UsuarioUtils {
         System.out.println("Genero:");
         usuario.setGenero(br.readLine());
 
-        usuario.setFoto(null);
+        br.close();
 
         return usuario;
     }
